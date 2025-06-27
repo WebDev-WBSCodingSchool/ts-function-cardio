@@ -23,6 +23,31 @@
         },
         showLineNumber: true
       });
+      const styleOverlay = () => {
+        const overlayHost = document.querySelector('vite-plugin-checker-error-overlay');
+        if (!overlayHost || !overlayHost.shadowRoot) return;
+        const applyStyles = () => {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          let style = overlayHost.shadowRoot.querySelector('style[data-theme-style]');
+          if (style) style.remove();
+          style = document.createElement('style');
+          style.setAttribute('data-theme-style', 'true');
+          style.textContent = `
+      .window {
+        background: ${prefersDark ? '#0f172a' : '#ffffff'} !important;
+        color: ${prefersDark ? '#f8fafc' : '#1f2937'} !important;
+        border-radius: 0.75rem !important;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
+        font-family: inherit !important;
+      }
+    `;
+          overlayHost.shadowRoot.appendChild(style);
+        };
+        applyStyles();
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', applyStyles);
+      };
+      window.addEventListener('load', styleOverlay);
       window.onerror = function (message, source, lineno, colno, error) {
         if (error instanceof Error) {
           console.error(`${error.name}: ${error.message}`);
