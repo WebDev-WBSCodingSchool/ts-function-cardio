@@ -97,12 +97,11 @@ fetchUserData('aa1123b');
 
 // 10
 function getWidth(rectangle) {
-  return rectangle.x2 - rectangle.x1;
+  return rectangle.base * rectangle.height;
 }
-
-getWidth({ x2: 100, x1: 50, y2: 220, y1: 120 });
+getWidth({ base: 2, height: 1 });
 //@ts-expect-error
-getWidth({ y1: 2, y2: 1 });
+getWidth({ base: 100, height: 50, pi: 220, e: 120 });
 
 //11
 type Response = any;
