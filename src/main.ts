@@ -87,6 +87,9 @@ formatUserInput(12434); // "User said 1243"
 //@ts-expect-error
 let output: number = formatUserInput(400);
 
+//don't remove this line - workaround for 'ts-expect-error bug'
+console.log(output);
+
 // 9
 type UserID = any;
 
