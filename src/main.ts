@@ -21,7 +21,7 @@ greet({ id: 1, name: 'Steve' });
 const user = {
   firstName: 'Karl',
   lastName: 'Karlsen',
-  email: 'karl@example.com'
+  email: 'karl@example.com',
 };
 
 type User = any;
@@ -44,6 +44,9 @@ isEven(4); //true
 isEven('4');
 //@ts-expect-error
 const result: string = isEven(5);
+
+//don't remove this line - workaround for 'ts-expect-error bug'
+console.log(result);
 
 //5
 function getFirstElementofStringArray(arr) {
@@ -83,6 +86,9 @@ formatUserInput('hello'); // "User said hello"
 formatUserInput(12434); // "User said 1243"
 //@ts-expect-error
 let output: number = formatUserInput(400);
+
+//don't remove this line - workaround for 'ts-expect-error bug'
+console.log(output);
 
 // 9
 type UserID = any;
